@@ -1,0 +1,5 @@
+---
+- community.general.homebrew:
+    name: awscli
+    state: present
+    update_homebrew: yes

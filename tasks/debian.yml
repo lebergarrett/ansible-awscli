@@ -1,17 +1,17 @@
 ---
 - name: Check if awscli exists
-  stat:
+  ansible.builtin.stat:
     path: /usr/local/bin/aws
   register: awscli_dir
 
 - name: Download awscli zip
-  get_url:
+  ansible.builtin.get_url:
     url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
     dest: /var/tmp/awscliv2.zip
   when: not awscli_dir.stat.exists
 
 - name: Unzip awscli zip
-  unarchive:
+  ansible.builtin.unarchive:
     src: /var/tmp/awscliv2.zip
     dest: /var/tmp/
     remote_src: yes
@@ -19,7 +19,7 @@
   when: not awscli_dir.stat.exists
 
 - name: Run awscli install script
-  command: ./aws/install
+  ansible.builtin.command: ./aws/install
   args:
     chdir: /var/tmp
     creates: /usr/local/bin/aws
@@ -27,7 +27,7 @@
   when: not awscli_dir.stat.exists
 
 - name: Cleanup
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   loop:

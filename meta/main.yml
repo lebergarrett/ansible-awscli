@@ -1,6 +1,6 @@
 galaxy_info:
   author: Garrett Leber
-  description: "Installs awscli"
+  description: "Installs awscliv2"
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -27,7 +27,7 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-    - name: Ubuntu
+    - name: Debian
     - name: macOS
 
   galaxy_tags:
@@ -41,4 +41,3 @@ galaxy_info:
 
 dependencies:
   - community.general
-  - geerlingguy.mac

@@ -4,16 +4,15 @@
     path: /usr/local/bin/aws
   register: awscli_dir
 
-- name: Download awscli zip
-  ansible.builtin.get_url:
-    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-    dest: /var/tmp/awscliv2.zip
-  when: not awscli_dir.stat.exists
+- name: Install unzip
+  ansible.builtin.apt:
+    name: unzip
+    state: present
 
 - name: Unzip awscli zip
   ansible.builtin.unarchive:
-    src: /var/tmp/awscliv2.zip
-    dest: /var/tmp/
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /var/tmp
     remote_src: yes
     creates: /var/tmp/awscli/
   when: not awscli_dir.stat.exists
